@@ -1,15 +1,13 @@
 from fastapi import FastAPI
-from diynai import sql_chain
+from diynai import agent_chain as chain
 from model import Query
 
 app = FastAPI()
 
-print("CHATBOT READY!")
-
 
 @app.get("/")
-async def root(token: Query):
+async def root(query: Query):
 
-    result = sql_chain.invoke(token.question)
+    query.answer = chain.run(query.question)
 
-    return result
+    return query
