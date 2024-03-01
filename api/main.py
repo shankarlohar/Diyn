@@ -10,6 +10,6 @@ print("CHATBOT READY!")
 @app.get("/")
 async def root(token: Query):
 
-    result = sql_chain.run(token.question)
+    result = sql_chain.invoke(token.question)
 
     return result
